@@ -651,11 +651,23 @@ var gQuicktext = {
     switch(aMode)
     {
       case 1:
-        filePicker.init(aWindow, aTitle, filePicker.modeSave);
+        try {
+          // TB 115
+          filePicker.init(aWindow, aTitle, filePicker.modeSave);
+        } catch (ex) {
+          // TB 128
+          filePicker.init(aWindow.browsingContext, aTitle, filePicker.modeSave);
+        }
         checkFileEncoding = false;
         break;
       default:
-        filePicker.init(aWindow, aTitle, filePicker.modeOpen);
+        try {
+          // TB 115
+          filePicker.init(aWindow, aTitle, filePicker.modeOpen);
+        } catch (ex) {
+          // TB 128
+          filePicker.init(aWindow.browsingContext, aTitle, filePicker.modeOpen);
+        }
         break;
     }
 
